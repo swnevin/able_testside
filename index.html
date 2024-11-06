@@ -80,3 +80,37 @@
         <div class="car2"></div>
     </div>
 </body>
+<body>
+    <script src="https://swnevin.github.io/abes_assets/extensions.js"></script>
+    <script type="text/javascript">
+        let proactiveMessage = "Jeg hjelper deg gjerne!";
+        let widgetStyleSheet = "https://swnevin.github.io/abes_assets/styles.css";
+        (function(d, t) {
+          var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
+          v.onload = function() {
+            window.voiceflow.chat.load({
+              verify: { projectID: '672ba53f673ad3993b94f339' },
+              url: 'https://general-runtime.voiceflow.com',
+              versionID: 'production',
+              assistant: {
+                stylesheet: widgetStyleSheet,
+                extensions: [FormExtension]
+              },
+              launch: {
+                event: { type: "launch", payload: { browser_url: window.location.href } }
+              }
+            }).then(() => {
+                window.voiceflow.chat.proactive.clear();
+                window.voiceflow.chat.proactive.push(
+                    { type: 'text', payload: { message: proactiveMessage } }
+                );
+            });
+          };
+          v.src = "https://cdn.voiceflow.com/widget/bundle.mjs"; 
+          v.type = "text/javascript"; 
+          s.parentNode.insertBefore(v, s);
+      })(document, 'script');
+    </script>
+</body>
+</html>
+
